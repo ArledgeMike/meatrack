@@ -5,3 +5,12 @@ node_modules
 .vscode
 ./.vscode
 ./.vscode/
+
+.eslintcache
+./.eslintcache
+
+.DS_Store
+./.DS_Store
+
+npm-debug.log
+./npm-debug.log
