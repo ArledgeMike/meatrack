@@ -11,10 +11,6 @@ const PATHS = {
 const common ={
     
     entry:{
-        hmr: [
-            'webpack-dev-server/client?http://localhost:8080',
-            'webpack/hot/dev-server',
-        ],
         app: PATHS.app
     },
     output:{
@@ -31,6 +27,12 @@ const common ={
 };
 
 const devConfig = {
+    entry:{
+        hmr: [
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/dev-server',
+        ]
+    },
     devServer:{
         historyApiFallback: true,
         stats: 'errors-only',

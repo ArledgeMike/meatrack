@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Webpack React compiler",
   "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArledgeMike/meatrack"
+  },
   "scripts": {
     "build": "webpack --env production",
     "dev": "webpack-dev-server --env development",
