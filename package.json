@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ArledgeMike/meatrack"
+    "url": "https://github.com/ArledgeMike/meatrack.git"
   },
   "scripts": {
     "build": "webpack --env production",

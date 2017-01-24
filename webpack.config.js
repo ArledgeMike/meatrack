@@ -33,6 +33,18 @@ const devConfig = {
             'webpack/hot/dev-server',
         ]
     },
+    module:{
+        rules:[
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                loader: 'eslint-loader',
+                options:{
+                    emitWarning: true
+                }
+            }
+        ]
+    },
     devServer:{
         historyApiFallback: true,
         stats: 'errors-only',
