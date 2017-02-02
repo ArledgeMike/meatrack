@@ -1,6 +1,10 @@
+@import './config/variables';
+
 html,
 body {
-  background-color: lightgray;
-  height: 100%;
-  width: 100%;
+  background-color: red;
+  h1 {
+    color: $primary-color;
+  }
 }
+

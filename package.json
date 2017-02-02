@@ -19,13 +19,19 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "css-loader": "^0.26.1",
     "eslint": "^3.14.0",
     "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-standard": "^2.0.1",
     "html-webpack-plugin": "^2.26.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^2.6.1"
   }
 }

@@ -1,3 +1,4 @@
+import './public/scss/styles.scss';
 import Game from './game/game';
 
-document.body.appendChild(Game());
+document.getElementById('app').appendChild(Game());     

@@ -1,17 +1,23 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const parts = require('./webpack.parts');
 
-const webpack = require('webpack');
+//const webpack = require('webpack');
 
 const PATHS = {
     app: path.join(__dirname, 'app'),
     dist: path.join(__dirname, 'dist')
 };
 
-const common ={
-    
+const common =merge({
     entry:{
-        app: PATHS.app
+        app: PATHS.app,
+        //TODO this has to be removed
+        hmr: [
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/dev-server'
+        ]
     },
     output:{
         path: PATHS.dist,
@@ -24,51 +30,29 @@ const common ={
             template: './app/index.html',
         })
     ]
-};
-
-const devConfig = {
-    entry:{
-        hmr: [
-            'webpack-dev-server/client?http://localhost:8080',
-            'webpack/hot/dev-server',
-        ]
-    },
-    module:{
-        rules:[
-            {
-                test: /\.js$/,
-                enforce: 'pre',
-                loader: 'eslint-loader',
-                options:{
-                    emitWarning: true
-                }
-            }
-        ]
-    },
-    devServer:{
-        historyApiFallback: true,
-        stats: 'errors-only',
-        host: process.env.HOST,
-        port: process.env.PORT
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
-    ]
-};
+});
 
 module.exports = function(env){
 
     if(env === 'production'){
-        return common;
+        return merge([
+            parts.prodEntryPath,
+            common,
+           
+            parts.lintJavaScript({ paths: PATHS.app })
+        ]);
     }
 
-    return Object.assign(
-        {},
+    return merge([
         common,
-        devConfig,
-        {
-            plugins: common.plugins.concat(devConfig.plugins)
-        }
-    );
+        parts.loadCss(PATHS.app),
+        parts.devServer,
+        
+        parts.lintJavaScript({
+            paths: PATHS.app,
+            options: {
+                emitWarnings: true
+            }
+        })
+    ]);
 };
