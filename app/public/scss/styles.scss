@@ -1,8 +1,8 @@
-@import './config/variables';
+@import './config/_variables.scss';
 
 html,
 body {
-  background-color: red;
+  background-color: $secondary_color;
   h1 {
     color: $primary-color;
   }

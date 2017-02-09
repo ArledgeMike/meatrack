@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const parts = require('./webpack.parts');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 //const webpack = require('webpack');
 
 const PATHS = {
@@ -11,6 +14,7 @@ const PATHS = {
 };
 
 const common =merge({
+    devtool: 'inline-source-map',
     entry:{
         app: PATHS.app,
         //TODO this has to be removed
@@ -22,7 +26,8 @@ const common =merge({
     output:{
         path: PATHS.dist,
         filename: '[name].js'
-    },
+    }
+    /*,
     plugins:[
         new HtmlWebpackPlugin({
             title: 'Meat Rack',
@@ -30,6 +35,7 @@ const common =merge({
             template: './app/index.html',
         })
     ]
+    */
 });
 
 module.exports = function(env){
@@ -42,12 +48,12 @@ module.exports = function(env){
             parts.lintJavaScript({ paths: PATHS.app })
         ]);
     }
-
+    
     return merge([
         common,
         parts.loadCss(PATHS.app),
         parts.devServer,
-        
+        parts.loadPlugins(),
         parts.lintJavaScript({
             paths: PATHS.app,
             options: {

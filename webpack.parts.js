@@ -1,4 +1,7 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 //ENTRY PATHS MIGHT NOT WORK
 exports.devEntryPath = function(){
@@ -30,10 +33,12 @@ exports.devServer = function(options) {
             host: options.host, 
             port: options.port, 
         },
-        plugins: [
+       /* plugins: [
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin()
-        ],
+            new webpack.NamedModulesPlugin(),
+            new ExtractTextPlugin('stylesheets/[name].css')
+            
+        ],*/
     };
 };
 
@@ -60,10 +65,31 @@ exports.loadCss = function(paths){
                 {
                     test: /\.scss$/,
                     include: paths,
-                    loaders: ['style-loader', 'css-loader', 'sass-loader']
+                    exclude: /node_modules/,
+                    use: ExtractTextPlugin.extract(['css-loader','sass-loader']),
+                    //loaders: ['style-loader', 'css-loader', 'sass-loader']
+
                 }
             ]
-
         }
+    };
+};
+
+
+exports.loadPlugins = function(paths){
+    return{
+        plugins:[
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+            new ExtractTextPlugin({filename: 'style.css',
+            allChunks:true
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Meat Rack',
+                inject: 'body',
+                template: './app/index.html',
+            }),
+
+        ]
     };
 };
