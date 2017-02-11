@@ -23,6 +23,7 @@ module.exports = (env)=>{
     if(env === 'production'){
         return merge([
             common,
+            parts.loadImages({paths: PATHS.app}),
             parts.lintJavaScript({ paths: PATHS.app }),
             parts.loadCss(PATHS.app),
             parts.loadPlugins()
@@ -32,6 +33,7 @@ module.exports = (env)=>{
     return merge([
         common,
         parts.devServer,
+        parts.loadImages({paths: PATHS.app}),
         parts.lintJavaScript({
             paths: PATHS.app,
             options: {

@@ -45,8 +45,37 @@ exports.loadCss = (paths) =>{
     };
 };
 
+exports.loadHMR = (paths) =>{
+    return {
+        entry:{
+            app: paths,
+            hmr: [
+                'webpack-dev-server/client?http://localhost:8080',
+                'webpack/hot/dev-server'
+            ]
+        }
+    };
+};
 
-exports.loadPlugins = (paths) =>{
+exports.loadImages = ({include, exclude}) =>{
+    return {
+        module:{
+            rules: [
+                {
+                    test: /\.(jpg|png)$/,
+                    loader: 'file-loader',
+                    include,
+                    exclude,
+                    options: {
+                        name: './images/[name].[ext]'
+                    }
+                }
+            ]
+        }
+    };
+};
+
+exports.loadPlugins = () =>{
     return{
         plugins:[
             new webpack.HotModuleReplacementPlugin(),
@@ -61,17 +90,5 @@ exports.loadPlugins = (paths) =>{
                 template: './app/index.html',
             })
         ]
-    };
-};
-
-exports.loadHMR = (paths) =>{
-    return {
-        entry:{
-            app: paths,
-            hmr: [
-                'webpack-dev-server/client?http://localhost:8080',
-                'webpack/hot/dev-server'
-            ]
-        }
     };
 };

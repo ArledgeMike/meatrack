@@ -2,9 +2,17 @@
 
 html,
 body {
-  background-color: $secondary_color;
+  height: 100%;
+  width: 100%;
   h1 {
     color: $primary-color;
+    text-align: center;
   }
+}
+body{
+  background-color: $background_color;
+  background-image: url('../images/blackout_ronin.png');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
