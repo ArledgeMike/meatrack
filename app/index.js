@@ -1,4 +1,4 @@
 import './public/scss/styles.scss';
-import Game from './game/game';
+import testComponent from './components/testComponent';
 
-document.getElementById('app').appendChild(Game());
+document.getElementById('app').appendChild(testComponent());

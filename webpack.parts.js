@@ -38,7 +38,7 @@ exports.loadCss = (paths) =>{
                     test: /\.scss$/,
                     include: paths,
                     exclude: /node_modules/,
-                    use: ExtractTextPlugin.extract(['css-loader','sass-loader'])
+                    loader: ExtractTextPlugin.extract(['css-loader','sass-loader'])
                 }
             ]
         }
@@ -62,7 +62,7 @@ exports.loadImages = ({include, exclude}) =>{
         module:{
             rules: [
                 {
-                    test: /\.(jpg|png)$/,
+                    test: /\.(jpg|png|svg)$/,
                     loader: 'file-loader',
                     include,
                     exclude,

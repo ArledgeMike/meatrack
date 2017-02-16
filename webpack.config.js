@@ -7,7 +7,7 @@ const PATHS = {
     dist: path.join(__dirname, 'dist')
 };
 
-const common =merge({
+const common = merge({
     devtool: 'inline-source-map',
     entry:{
         app: PATHS.app,
@@ -18,18 +18,17 @@ const common =merge({
     }
 });
 
-module.exports = (env)=>{
+const productionRun = () => {
+    return merge([
+        common,
+        parts.loadImages({paths: PATHS.app}),
+        parts.lintJavaScript({ paths: PATHS.app }),
+        parts.loadCss(PATHS.app),
+        parts.loadPlugins()
+    ]);
+};
 
-    if(env === 'production'){
-        return merge([
-            common,
-            parts.loadImages({paths: PATHS.app}),
-            parts.lintJavaScript({ paths: PATHS.app }),
-            parts.loadCss(PATHS.app),
-            parts.loadPlugins()
-        ]);
-    }
-    
+const  developmentRun = () => {
     return merge([
         common,
         parts.devServer,
@@ -44,4 +43,14 @@ module.exports = (env)=>{
         parts.loadHMR(PATHS.app),
         parts.loadPlugins()
     ]);
+};
+
+module.exports = (env)=>{
+
+    if(env === 'production'){
+        return productionRun();
+    }
+    
+    return developmentRun();
+
 };
