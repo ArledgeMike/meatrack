@@ -36,7 +36,7 @@ const  developmentRun = () => {
         parts.lintJavaScript({
             paths: PATHS.app,
             options: {
-                emitWarnings: true
+                emitWarnings: false
             }
         }),
         parts.loadCss(PATHS.app),

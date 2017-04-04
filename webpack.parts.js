@@ -88,6 +88,9 @@ exports.loadPlugins = () =>{
                 title: 'Meat Rack',
                 inject: 'body',
                 template: './app/index.html',
+            }),
+            new webpack.DefinePlugin({
+                PRODUCTION: 'ENV'
             })
         ]
     };
